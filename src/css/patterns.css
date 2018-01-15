@@ -1,0 +1,47 @@
+.stack-item-1 {
+    background: linear-gradient(135deg, #ECEDDC 25%, transparent 25%) -50px 0, linear-gradient(225deg, #ECEDDC 25%, transparent 25%) -50px 0, linear-gradient(315deg, #ECEDDC 25%, transparent 25%), linear-gradient(45deg, #ECEDDC 25%, transparent 25%);
+    background-size: 20px 20px;
+    background-color: #f9a576;
+}
+
+.stack-item-2 {
+    background-color: #f0f0ee;
+    background-image: radial-gradient(#2b8f96 9px, transparent 10px), repeating-radial-gradient( #2b8f96 0, #2b8f96 4px, transparent 5px, transparent 20px, #2b8f96 21px, #2b8f96 25px, transparent 26px, transparent 50px);
+    background-size: 30px 30px, 90px 90px;
+    background-position: 0 0;
+}
+
+.stack-item-3 {
+    background-color: #f6650a;
+    background-image: radial-gradient(circle at 100% 150%, #f6650a 24%, #f0f0ee 25%, #f0f0ee 28%, #f6650a 29%, #f6650a 36%, #f0f0ee 36%, #f0f0ee 40%, transparent 40%, transparent), radial-gradient(circle at 0 150%, #f6650a 24%, #f0f0ee 25%, #f0f0ee 28%, #f6650a 29%, #f6650a 36%, #f0f0ee 36%, #f0f0ee 40%, transparent 40%, transparent), radial-gradient(circle at 50% 100%, #f0f0ee 10%, #f6650a 11%, #f6650a 23%, #f0f0ee 24%, #f0f0ee 30%, #f6650a 31%, #f6650a 43%, #f0f0ee 44%, #f0f0ee 50%, #f6650a 51%, #f6650a 63%, #f0f0ee 64%, #f0f0ee 71%, transparent 71%, transparent), radial-gradient(circle at 100% 50%, #f0f0ee 5%, #f6650a 6%, #f6650a 15%, #f0f0ee 16%, #f0f0ee 20%, #f6650a 21%, #f6650a 30%, #f0f0ee 31%, #f0f0ee 35%, #f6650a 36%, #f6650a 45%, #f0f0ee 46%, #f0f0ee 49%, transparent 50%, transparent), radial-gradient(circle at 0 50%, #f0f0ee 5%, #f6650a 6%, #f6650a 15%, #f0f0ee 16%, #f0f0ee 20%, #f6650a 21%, #f6650a 30%, #f0f0ee 31%, #f0f0ee 35%, #f6650a 36%, #f6650a 45%, #f0f0ee 46%, #f0f0ee 49%, transparent 50%, transparent);
+    background-size: 80px 40px;
+}
+
+.stack-item-4 {
+  background-color: #41b5b7;
+  background-image: radial-gradient(closest-side, transparent 98%, #e0e1dc  99%),
+  radial-gradient(closest-side, transparent 98%, #e0e1dc 99%);
+  background-size:40px 40px;
+  background-position:0 0, 20px 20px;
+}
+
+.stack-item-5 {
+  background:
+  radial-gradient(circle at 0% 50%, rgba(96, 16, 48, 0) 9px, #25599a 10px, rgba(96, 16, 48, 0) 11px) 0px 10px,
+  radial-gradient(at 100% 100%,      rgba(96, 16, 48, 0) 9px, #25599a 10px, rgba(96, 16, 48, 0) 11px),
+  #e0e1dc;
+  background-size: 20px 20px;
+}
+.stack-item-6 {
+  background: #25599b;
+}
+.stack-item-7 {
+  background: #77d4d5;
+}
+.stack-item-8 {
+
+  background: #f9a576;
+}
+.stack-item-9 {
+  background: #8d8e8a;
+}
