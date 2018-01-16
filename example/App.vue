@@ -76,7 +76,7 @@
 </template>
 
 <script>
-import StackGrid from './components/StackGrid'
+import StackGrid from '../src/StackGrid.vue'
 import vueSlider from 'vue-slider-component'
 export default {
   name: 'App',

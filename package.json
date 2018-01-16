@@ -1,21 +1,26 @@
 {
   "name": "vue-stack-grid",
   "version": "1.0.0",
-  "description": "A Vue.js project",
   "author": "mahy50 <934037783@qq.com>",
-  "private": true,
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mahy50/vue-stack-grid"
+  },
+  "main": "dist/vue-stack-grid.min.js",
+  "description": "Grid layout components for Vue.js",
+  "keywords": [
+    "grid layout",
+    "stack grid",
+    "vuejs"
+  ],
   "scripts": {
     "dev": "webpack-dev-server --inline --progress --config build/webpack.dev.conf.js",
-    "start": "npm run dev",
     "lint": "eslint --ext .js,.vue src",
-    "build": "node build/build.js"
+    "build": "node build/build.js",
+    "releaseaa": "npm run lint && webpack --progress --hide-modules --config  ./build/webpack.release.conf.js && webpack --progress --hide-modules --config  ./build/webpack.release.min.conf.js",
+    "release": "node build/release.js"
   },
-  "dependencies": {
-    "exenv": "^1.2.2",
-    "imagesloaded": "^4.1.4",
-    "vue": "^2.5.2",
-    "vue-slider-component": "^2.4.8"
-  },
+  "dependencies": {},
   "devDependencies": {
     "autoprefixer": "^7.1.2",
     "babel-core": "^6.22.1",
@@ -27,7 +32,7 @@
     "babel-plugin-transform-vue-jsx": "^3.5.0",
     "babel-preset-env": "^1.3.2",
     "babel-preset-stage-2": "^6.22.0",
-    "chalk": "^2.0.1",
+    "chalk": "^2.3.0",
     "copy-webpack-plugin": "^4.0.1",
     "css-loader": "^0.28.0",
     "eslint": "^4.15.0",
@@ -42,6 +47,7 @@
     "extract-text-webpack-plugin": "^3.0.0",
     "file-loader": "^1.1.4",
     "friendly-errors-webpack-plugin": "^1.6.1",
+    "gh-pages": "^1.1.0",
     "html-webpack-plugin": "^2.30.1",
     "node-notifier": "^5.1.2",
     "optimize-css-assets-webpack-plugin": "^3.2.0",
@@ -50,12 +56,15 @@
     "postcss-import": "^11.0.0",
     "postcss-loader": "^2.0.8",
     "postcss-url": "^7.2.1",
+    "readline-sync": "^1.4.7",
     "rimraf": "^2.6.0",
     "semver": "^5.3.0",
-    "shelljs": "^0.7.6",
+    "shelljs": "^0.8.0",
     "uglifyjs-webpack-plugin": "^1.1.1",
     "url-loader": "^0.5.8",
+    "vue": "^2.5.2",
     "vue-loader": "^13.3.0",
+    "vue-slider-component": "^2.4.8",
     "vue-style-loader": "^3.0.1",
     "vue-template-compiler": "^2.5.2",
     "webpack": "^3.6.0",

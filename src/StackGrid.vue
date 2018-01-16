@@ -7,9 +7,9 @@
 </template>
 
 <script>
-import './requestAnimationFrame'
-import * as easings from './easings'
-import { transition, setStyles } from './styleHelper'
+import './animation/requestAnimationFrame'
+import * as easings from './animation/easings'
+import { transition, setStyles } from './utils/styleHelper'
 export default {
   name: 'stack-grid',
   data () {
