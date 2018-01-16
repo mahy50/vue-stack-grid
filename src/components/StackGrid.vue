@@ -1,13 +1,15 @@
 <template>
-  <div class="stack-grid" ref="container">
-    <div class="stack-grid-wrap" ref="wrap">
+  <div class="stack-grid" ref="container" :style="containerStyles">
+    <div class="stack-grid-wrap" ref="wrap" :style="{position: 'relative'}">
       <slot></slot>
     </div>
   </div>
 </template>
 
 <script>
-// import imagesLoaded from 'imagesloaded'
+import './requestAnimationFrame'
+import * as easings from './easings'
+import { transition, setStyles } from './styleHelper'
 export default {
   name: 'stack-grid',
   data () {
@@ -17,22 +19,25 @@ export default {
     }
   },
   props: {
-    columnWidth: {
-      type: [Number],
-      default: 200
-    },
-    gutterX: {
-      type: Number,
-      default: 20
-    },
-    gutterY: {
-      type: Number,
-      default: 20
+    columnWidth: { type: [Number], default: 200 },
+    gutterX: { type: Number, default: 20 },
+    gutterY: { type: Number, default: 20 },
+    center: { type: Boolean, default: true },
+    easing: { type: String, default: easings.easeOut },
+    duration: { type: String, default: '480ms' },
+    delay: { type: String, default: '0ms' },
+    order: { type: Boolean, default: false }
+  },
+  computed: {
+    containerStyles () {
+      return {
+        display: this.center ? 'flex' : '',
+        'justify-content': this.center ? 'center' : ''
+      }
     }
   },
   methods: {
     getContainerWidth () {
-      console.log(this.$refs.container.parentNode.clientWidth)
       if (this.$refs.container.parentNode.clientWidth) {
         return this.$refs.container.parentNode.clientWidth
       } else {
@@ -52,30 +57,19 @@ export default {
     genStyles (posTop, posLeft) {
       // 判断动画效果，item起始点
       const {columnWidth} = this
-      // const {columnWidth, top = 0, left = 0, bottom = 0} = this
       let styles = {
         display: 'block',
         position: 'absolute',
-        width: columnWidth + 'px',
-        // bottom: bottom + 'px',
-        // top: top + 'px',
-        // left: left + 'px',
-        // transform: `translateX(${posTop}px) translateY(${posLeft}px)`,
-        transition: 'all 480ms ease-out',
         top: posTop + 'px',
-        left: posLeft + 'px'
+        left: posLeft + 'px',
+        transition: transition(['opacity', 'top', 'left'], this.duration, easings[this.easing], this.delay),
+        width: columnWidth + 'px'
       }
       return styles
     },
-    styleHelper (elm, styles) {
-      let styleKeys = Object.keys(styles)
-      styleKeys.forEach((key) => {
-        elm.style.setProperty(key, styles[key])
-      })
-    },
     setWrapStyles (width, height) {
       this.$nextTick(() => {
-        this.styleHelper(this.$refs.wrap, {
+        setStyles(this.$refs.wrap, {
           height: height + 'px',
           width: width + 'px'
         })
@@ -84,21 +78,26 @@ export default {
     resetWrapStyles () {
       console.log('object')
       this.$nextTick(() => {
-        this.styleHelper(this.$refs.wrap, {
+        setStyles(this.$refs.wrap, {
           height: 0 + 'px'
         })
       })
     },
     genLayout (data, number) {
-      const {columnWidth, gutterX, gutterY} = this
+      const {columnWidth, gutterX, gutterY, order} = this
       let heights = Array(number).fill(0)
       data.forEach((item, index) => {
-        let i = heights.indexOf(Math.min(...heights)) // 顺序填充，还是最小填充
-        let top = heights[i]
-        let left = i * (columnWidth + gutterX)
+        let i
+        if (order) {
+          i = index % heights.length
+        } else {
+          i = heights.indexOf(Math.min(...heights))
+        }
+        let posTop = heights[i]
+        let posLeft = i * (columnWidth + gutterX)
         heights[i] += this.getItemHeight(item) + gutterY
-        let styles = this.genStyles(top, left)
-        this.styleHelper(item.elm, styles)
+        let styles = this.genStyles(posTop, posLeft)
+        setStyles(item.elm, styles)
       })
       const width = number * (columnWidth + gutterX) - gutterX
       const height = Math.max(...heights) - gutterY
@@ -126,7 +125,7 @@ export default {
   },
   updated () {
     if (this.$slots.default) {
-      this.updateIfNeed(true)
+      requestAnimationFrame(() => this.updateIfNeed(true))
     } else {
       this.resetWrapStyles()
     }
@@ -135,20 +134,10 @@ export default {
     this.$nextTick(() => {
       this.init()
     })
-    window.addEventListener('resize', () => this.updateIfNeed())
+    window.addEventListener('resize', () => requestAnimationFrame(() => this.updateIfNeed()))
   },
   destroyed () {
-    window.removeEventListener('resize', () => this.updateIfNeed())
+    window.removeEventListener('resize', () => requestAnimationFrame(() => this.updateIfNeed()))
   }
 }
 </script>
-
-<style>
-.stack-grid {
-  display: flex;
-  justify-content: center;
-}
-.stack-grid-wrap {
-  position: relative;
-}
-</style>
