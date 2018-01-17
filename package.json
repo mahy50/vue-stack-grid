@@ -1,5 +1,5 @@
 {
-  "name": "vue-stack-grid",
+  "name": "vue-stack-grid-component",
   "version": "1.0.0",
   "author": "mahy50 <934037783@qq.com>",
   "repository": {
@@ -16,8 +16,8 @@
   "scripts": {
     "dev": "webpack-dev-server --inline --progress --config build/webpack.dev.conf.js",
     "lint": "eslint --ext .js,.vue src",
-    "build": "node build/build.js",
-    "releaseaa": "npm run lint && webpack --progress --hide-modules --config  ./build/webpack.release.conf.js && webpack --progress --hide-modules --config  ./build/webpack.release.min.conf.js",
+    "example": "node build/build.js",
+    "gh": "npm run example && node gh-deploy",
     "release": "node build/release.js"
   },
   "dependencies": {},

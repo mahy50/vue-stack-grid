@@ -23,7 +23,7 @@ export default {
     gutterX: { type: Number, default: 20 },
     gutterY: { type: Number, default: 20 },
     center: { type: Boolean, default: true },
-    easing: { type: String, default: easings.easeOut },
+    easing: { type: String, default: 'easeOut' },
     duration: { type: String, default: '480ms' },
     delay: { type: String, default: '0ms' },
     order: { type: Boolean, default: false }
@@ -38,7 +38,7 @@ export default {
   },
   methods: {
     getContainerWidth () {
-      if (this.$refs.container.parentNode.clientWidth) {
+      if (this.$refs.container.parentNode.clientWidth) { // todo
         return this.$refs.container.parentNode.clientWidth
       } else {
         return window ? window.document.clientWidth : ''
@@ -55,7 +55,6 @@ export default {
       }
     },
     genStyles (posTop, posLeft) {
-      // 判断动画效果，item起始点
       const {columnWidth} = this
       let styles = {
         display: 'block',
@@ -84,10 +83,11 @@ export default {
       })
     },
     genLayout (data, number) {
+      if (!data) return
       const {columnWidth, gutterX, gutterY, order} = this
       let heights = Array(number).fill(0)
+      let i
       data.forEach((item, index) => {
-        let i
         if (order) {
           i = index % heights.length
         } else {
