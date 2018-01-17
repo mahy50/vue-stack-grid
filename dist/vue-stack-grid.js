@@ -370,7 +370,7 @@ module.exports = function (it) {
     gutterX: { type: Number, default: 20 },
     gutterY: { type: Number, default: 20 },
     center: { type: Boolean, default: true },
-    easing: { type: String, default: __WEBPACK_IMPORTED_MODULE_2__animation_easings__["easeOut"] },
+    easing: { type: String, default: 'easeOut' },
     duration: { type: String, default: '480ms' },
     delay: { type: String, default: '0ms' },
     order: { type: Boolean, default: false }
@@ -386,6 +386,7 @@ module.exports = function (it) {
   methods: {
     getContainerWidth: function getContainerWidth() {
       if (this.$refs.container.parentNode.clientWidth) {
+        // todo
         return this.$refs.container.parentNode.clientWidth;
       } else {
         return window ? window.document.clientWidth : '';
@@ -404,7 +405,6 @@ module.exports = function (it) {
       }
     },
     genStyles: function genStyles(posTop, posLeft) {
-      // 判断动画效果，item起始点
       var columnWidth = this.columnWidth;
 
       var styles = {
@@ -440,14 +440,15 @@ module.exports = function (it) {
     genLayout: function genLayout(data, number) {
       var _this3 = this;
 
+      if (!data) return;
       var columnWidth = this.columnWidth,
           gutterX = this.gutterX,
           gutterY = this.gutterY,
           order = this.order;
 
       var heights = Array(number).fill(0);
+      var i = void 0;
       data.forEach(function (item, index) {
-        var i = void 0;
         if (order) {
           i = index % heights.length;
         } else {

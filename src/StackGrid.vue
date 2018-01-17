@@ -38,8 +38,9 @@ export default {
   },
   methods: {
     getContainerWidth () {
-      if (this.$refs.container.parentNode.clientWidth) { // todo
-        return this.$refs.container.parentNode.clientWidth
+      let parentNode = this.$refs.container.parentNode
+      if (parentNode || parentNode.clientWidth) { // todo
+        return parentNode.clientWidth
       } else {
         return window ? window.document.clientWidth : ''
       }
@@ -75,7 +76,6 @@ export default {
       })
     },
     resetWrapStyles () {
-      console.log('object')
       this.$nextTick(() => {
         setStyles(this.$refs.wrap, {
           height: 0 + 'px'
@@ -108,7 +108,7 @@ export default {
       const num = this.getColumnNum(this.getContainerWidth())
       const {oldColumnNum} = this
       if (need || oldColumnNum !== num) {
-        this.genLayout(this.$slots.default, num)
+        requestAnimationFrame(() => this.genLayout(this.$slots.default, num))
         this.oldColumnNum = num
       }
     },
@@ -125,7 +125,7 @@ export default {
   },
   updated () {
     if (this.$slots.default) {
-      requestAnimationFrame(() => this.updateIfNeed(true))
+      this.updateIfNeed(true)
     } else {
       this.resetWrapStyles()
     }
@@ -134,10 +134,10 @@ export default {
     this.$nextTick(() => {
       this.init()
     })
-    window.addEventListener('resize', () => requestAnimationFrame(() => this.updateIfNeed()))
+    window.addEventListener('resize', this.updateIfNeed)
   },
   destroyed () {
-    window.removeEventListener('resize', () => requestAnimationFrame(() => this.updateIfNeed()))
+    window.removeEventListener('resize', this.updateIfNeed)
   }
 }
 </script>
