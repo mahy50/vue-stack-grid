@@ -17,7 +17,7 @@
     "dev": "webpack-dev-server --inline --progress --config build/webpack.dev.conf.js",
     "lint": "eslint --ext .js,.vue src",
     "example": "node build/build.js",
-    "gh": "npm run example && node gh-deploy",
+    "gh": "npm run example && node build/gh-deploy.js",
     "release": "node build/release.js"
   },
   "dependencies": {},
