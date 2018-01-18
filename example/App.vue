@@ -3,38 +3,39 @@
     <!-- form control-->
     <div class="controller">
       <div class="btn-group">
-        <button @click="addItems(2)">添加</button>
-        <button @click="delItems()">删除</button>
-        <button @click="shuffle()">变换</button>
+        <button @click="addItems(2)">Append</button>
+        <button @click="delItems()">Delete</button>
+        <button @click="shuffle()">Shuffle</button>
         <label>Easing:</label>
         <select name="easing" id="" v-model="easing" aria-placeholder="easing">
           <option value="linear">linear</option>
           <option value="easeIn">easeIn</option>
           <option value="easeOut">easeOut</option>
-          <option value="sineIn">sineIn</option>
-          <option value="sineOut">sineOut</option>
-          <option value="sineInOut">sineInOut</option>
-          <option value="quadIn">quadIn</option>
-          <option value="quadOut">quadOut</option>
-          <option value="quadInOut">quadInOut</option>
-          <option value="cubicIn">cubicIn</option>
-          <option value="cubicOut">cubicOut</option>
-          <option value="cubicInOut">cubicInOut</option>
-          <option value="quartIn">quartIn</option>
-          <option value="quartOut">quartOut</option>
-          <option value="quartInOut">quartInOut</option>
-          <option value="quintIn">quintIn</option>
-          <option value="quintOut">quintOut</option>
-          <option value="quintInOut">quintInOut</option>
-          <option value="expoIn">expoIn</option>
-          <option value="expoOut">expoOut</option>
-          <option value="expoInOut">expoInOut</option>
-          <option value="circIn">circIn</option>
-          <option value="circOut">circOut</option>
-          <option value="circInOut">circInOut</option>
-          <option value="backIn">backIn</option>
-          <option value="backOut">backOut</option>
-          <option value="backInOut">backInOut</option>
+          <option value="easeInOut">easeInOut</option>
+          <option value="easeInSine">easeInSine</option>
+          <option value="easeOutSine">easeOutSine</option>
+          <option value="easeInOutSine">easeInOutSine</option>
+          <option value="easeInQuad">easeInQuad</option>
+          <option value="easeOutQuad">easeOutQuad</option>
+          <option value="easeInOutQuad">easeInOutQuad</option>
+          <option value="easeInCubic">easeInCubic</option>
+          <option value="easeOutCubic">easeOutCubic</option>
+          <option value="easeInOutCubic">easeInOutCubic</option>
+          <option value="easeInQuart">easeInQuart</option>
+          <option value="easeOutQuart">easeOutQuart</option>
+          <option value="easeInOutQuart">easeInOutQuart</option>
+          <option value="easeInQuint">easeInQuint</option>
+          <option value="easeOutQuint">easeOutQuint</option>
+          <option value="easeInOutQuint">easeInOutQuint</option>
+          <option value="easeInExpo">easeInExpo</option>
+          <option value="easeOutExpo">easeOutExpo</option>
+          <option value="easeInOutExpo">easeInOutExpo</option>
+          <option value="easeInCirc">easeInCirc</option>
+          <option value="easeOutCirc">easeOutCirc</option>
+          <option value="easeInOutCirc">easeInOutCirc</option>
+          <option value="easeInBack">easeInBack</option>
+          <option value="easeOutBack">easeOutBack</option>
+          <option value="easeInOutBack">easeInOutBack</option>
         </select>
         <label for="">order:
           <input type="checkbox" v-model="order">
@@ -145,7 +146,7 @@ export default {
     }
   },
   mounted () {
-    this.addItems(this.getRandomNum(10, 10))
+    this.addItems(this.getRandomNum(15, 20))
   }
 }
 </script>
@@ -190,6 +191,7 @@ button {
   background: none;
 }
 select, option {
-  height: 30px;
+  height: 26px;
+  background: #fff;
 }
 </style>

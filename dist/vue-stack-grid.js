@@ -366,7 +366,7 @@ module.exports = function (it) {
   },
 
   props: {
-    columnWidth: { type: [Number], default: 200 },
+    columnWidth: { type: Number, default: 200 },
     gutterX: { type: Number, default: 20 },
     gutterY: { type: Number, default: 20 },
     center: { type: Boolean, default: true },
@@ -385,9 +385,9 @@ module.exports = function (it) {
   },
   methods: {
     getContainerWidth: function getContainerWidth() {
-      if (this.$refs.container.parentNode.clientWidth) {
-        // todo
-        return this.$refs.container.parentNode.clientWidth;
+      var parentNode = this.$refs.container.parentNode;
+      if (parentNode || parentNode.clientWidth) {
+        return parentNode.clientWidth;
       } else {
         return window ? window.document.clientWidth : '';
       }
@@ -430,7 +430,6 @@ module.exports = function (it) {
     resetWrapStyles: function resetWrapStyles() {
       var _this2 = this;
 
-      console.log('object');
       this.$nextTick(function () {
         Object(__WEBPACK_IMPORTED_MODULE_3__utils_styleHelper__["a" /* setStyles */])(_this2.$refs.wrap, {
           height: 0 + 'px'
@@ -466,34 +465,34 @@ module.exports = function (it) {
       this.dataset = this.$slots.default.length;
     },
     updateIfNeed: function updateIfNeed(need) {
+      var _this4 = this;
+
       var num = this.getColumnNum(this.getContainerWidth());
       var oldColumnNum = this.oldColumnNum;
 
       if (need || oldColumnNum !== num) {
-        this.genLayout(this.$slots.default, num);
+        requestAnimationFrame(function () {
+          return _this4.genLayout(_this4.$slots.default, num);
+        });
         this.oldColumnNum = num;
       }
     },
     init: function init() {
-      var _this4 = this;
+      var _this5 = this;
 
       var columnNum = this.getColumnNum(this.getContainerWidth());
       if (this.$slots.default) {
         this.genLayout(this.$slots.default, columnNum);
       } else {
         this.$nextTick(function () {
-          _this4.genLayout(_this4.$slots.default, columnNum);
+          _this5.genLayout(_this5.$slots.default, columnNum);
         });
       }
     }
   },
   updated: function updated() {
-    var _this5 = this;
-
     if (this.$slots.default) {
-      requestAnimationFrame(function () {
-        return _this5.updateIfNeed(true);
-      });
+      this.updateIfNeed(true);
     } else {
       this.resetWrapStyles();
     }
@@ -504,20 +503,10 @@ module.exports = function (it) {
     this.$nextTick(function () {
       _this6.init();
     });
-    window.addEventListener('resize', function () {
-      return requestAnimationFrame(function () {
-        return _this6.updateIfNeed();
-      });
-    });
+    window.addEventListener('resize', this.updateIfNeed);
   },
   destroyed: function destroyed() {
-    var _this7 = this;
-
-    window.removeEventListener('resize', function () {
-      return requestAnimationFrame(function () {
-        return _this7.updateIfNeed();
-      });
-    });
+    window.removeEventListener('resize', this.updateIfNeed);
   }
 });
 
@@ -1437,59 +1426,59 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "easeIn", function() { return easeIn; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "easeOut", function() { return easeOut; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "easeInOut", function() { return easeInOut; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "sineIn", function() { return sineIn; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "sineOut", function() { return sineOut; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "sineInOut", function() { return sineInOut; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "quadIn", function() { return quadIn; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "quadOut", function() { return quadOut; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "quadInOut", function() { return quadInOut; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "cubicIn", function() { return cubicIn; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "cubicOut", function() { return cubicOut; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "cubicInOut", function() { return cubicInOut; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "quartIn", function() { return quartIn; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "quartOut", function() { return quartOut; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "quartInOut", function() { return quartInOut; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "quintIn", function() { return quintIn; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "quintOut", function() { return quintOut; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "quintInOut", function() { return quintInOut; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "expoIn", function() { return expoIn; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "expoOut", function() { return expoOut; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "expoInOut", function() { return expoInOut; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "circIn", function() { return circIn; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "circOut", function() { return circOut; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "circInOut", function() { return circInOut; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "backIn", function() { return backIn; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "backOut", function() { return backOut; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "backInOut", function() { return backInOut; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "easeInSine", function() { return easeInSine; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "easeOutSine", function() { return easeOutSine; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "easeInOutSine", function() { return easeInOutSine; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "easeInQuad", function() { return easeInQuad; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "easeOutQuad", function() { return easeOutQuad; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "easeInOutQuad", function() { return easeInOutQuad; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "easeInCubic", function() { return easeInCubic; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "easeOutCubic", function() { return easeOutCubic; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "easeInOutCubic", function() { return easeInOutCubic; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "easeInQuart", function() { return easeInQuart; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "easeOutQuart", function() { return easeOutQuart; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "easeInOutQuart", function() { return easeInOutQuart; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "easeInQuint", function() { return easeInQuint; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "easeOutQuint", function() { return easeOutQuint; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "easeInOutQuint", function() { return easeInOutQuint; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "easeInExpo", function() { return easeInExpo; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "easeOutExpo", function() { return easeOutExpo; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "easeInOutExpo", function() { return easeInOutExpo; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "easeInCirc", function() { return easeInCirc; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "easeOutCirc", function() { return easeOutCirc; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "easeInOutCirc", function() { return easeInOutCirc; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "easeInBack", function() { return easeInBack; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "easeOutBack", function() { return easeOutBack; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "easeInOutBack", function() { return easeInOutBack; });
 // http://easings.net/
 var linear = 'linear';
 var easeIn = 'ease-in';
 var easeOut = 'ease-out';
 var easeInOut = 'ease-in-out';
-var sineIn = 'cubic-bezier(0.47, 0, 0.745, 0.715)';
-var sineOut = 'cubic-bezier(0.39, 0.575, 0.565, 1)';
-var sineInOut = 'cubic-bezier(0.445, 0.05, 0.55, 0.95)';
-var quadIn = 'cubic-bezier(0.55, 0.085, 0.68, 0.53)';
-var quadOut = 'cubic-bezier(0.25, 0.46, 0.45, 0.94)';
-var quadInOut = 'cubic-bezier(0.455, 0.03, 0.515, 0.955)';
-var cubicIn = 'cubic-bezier(0.55, 0.055, 0.675, 0.19)';
-var cubicOut = 'cubic-bezier(0.215, 0.61, 0.355, 1)';
-var cubicInOut = 'cubic-bezier(0.645, 0.045, 0.355, 1)';
-var quartIn = 'cubic-bezier(0.895, 0.03, 0.685, 0.22)';
-var quartOut = 'cubic-bezier(0.165, 0.84, 0.44, 1)';
-var quartInOut = 'cubic-bezier(0.77, 0, 0.175, 1)';
-var quintIn = 'cubic-bezier(0.755, 0.05, 0.855, 0.06)';
-var quintOut = 'cubic-bezier(0.23, 1, 0.32, 1)';
-var quintInOut = 'cubic-bezier(0.86, 0, 0.07, 1)';
-var expoIn = 'cubic-bezier(0.95, 0.05, 0.795, 0.035)';
-var expoOut = 'cubic-bezier(0.19, 1, 0.22, 1)';
-var expoInOut = 'cubic-bezier(1, 0, 0, 1)';
-var circIn = 'cubic-bezier(0.6, 0.04, 0.98, 0.335)';
-var circOut = 'cubic-bezier(0.075, 0.82, 0.165, 1)';
-var circInOut = 'cubic-bezier(0.785, 0.135, 0.15, 0.86)';
-var backIn = 'cubic-bezier(0.6, -0.28, 0.735, 0.045)';
-var backOut = 'cubic-bezier(0.175, 0.885, 0.32, 1.275)';
-var backInOut = 'cubic-bezier(0.68, -0.55, 0.265, 1.55)';
+var easeInSine = 'cubic-bezier(0.47, 0, 0.745, 0.715)';
+var easeOutSine = 'cubic-bezier(0.39, 0.575, 0.565, 1)';
+var easeInOutSine = 'cubic-bezier(0.445, 0.05, 0.55, 0.95)';
+var easeInQuad = 'cubic-bezier(0.55, 0.085, 0.68, 0.53)';
+var easeOutQuad = 'cubic-bezier(0.25, 0.46, 0.45, 0.94)';
+var easeInOutQuad = 'cubic-bezier(0.455, 0.03, 0.515, 0.955)';
+var easeInCubic = 'cubic-bezier(0.55, 0.055, 0.675, 0.19)';
+var easeOutCubic = 'cubic-bezier(0.215, 0.61, 0.355, 1)';
+var easeInOutCubic = 'cubic-bezier(0.645, 0.045, 0.355, 1)';
+var easeInQuart = 'cubic-bezier(0.895, 0.03, 0.685, 0.22)';
+var easeOutQuart = 'cubic-bezier(0.165, 0.84, 0.44, 1)';
+var easeInOutQuart = 'cubic-bezier(0.77, 0, 0.175, 1)';
+var easeInQuint = 'cubic-bezier(0.755, 0.05, 0.855, 0.06)';
+var easeOutQuint = 'cubic-bezier(0.23, 1, 0.32, 1)';
+var easeInOutQuint = 'cubic-bezier(0.86, 0, 0.07, 1)';
+var easeInExpo = 'cubic-bezier(0.95, 0.05, 0.795, 0.035)';
+var easeOutExpo = 'cubic-bezier(0.19, 1, 0.22, 1)';
+var easeInOutExpo = 'cubic-bezier(1, 0, 0, 1)';
+var easeInCirc = 'cubic-bezier(0.6, 0.04, 0.98, 0.335)';
+var easeOutCirc = 'cubic-bezier(0.075, 0.82, 0.165, 1)';
+var easeInOutCirc = 'cubic-bezier(0.785, 0.135, 0.15, 0.86)';
+var easeInBack = 'cubic-bezier(0.6, -0.28, 0.735, 0.045)';
+var easeOutBack = 'cubic-bezier(0.175, 0.885, 0.32, 1.275)';
+var easeInOutBack = 'cubic-bezier(0.68, -0.55, 0.265, 1.55)';
 
 /***/ }),
 /* 60 */

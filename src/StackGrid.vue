@@ -19,7 +19,7 @@ export default {
     }
   },
   props: {
-    columnWidth: { type: [Number], default: 200 },
+    columnWidth: { type: Number, default: 200 },
     gutterX: { type: Number, default: 20 },
     gutterY: { type: Number, default: 20 },
     center: { type: Boolean, default: true },
@@ -39,7 +39,7 @@ export default {
   methods: {
     getContainerWidth () {
       let parentNode = this.$refs.container.parentNode
-      if (parentNode || parentNode.clientWidth) { // todo
+      if (parentNode || parentNode.clientWidth) {
         return parentNode.clientWidth
       } else {
         return window ? window.document.clientWidth : ''
